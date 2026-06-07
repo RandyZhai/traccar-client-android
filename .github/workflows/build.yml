@@ -1,0 +1,75 @@
+name: Build APK
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platforms;android-35 build-tools;35.0.0'
+
+      - name: Create dummy google-services.json
+        run: |
+          cat > app/google-services.json << 'JSON'
+          {
+            "project_info": {
+              "project_number": "000000000000",
+              "project_id": "dummy-project"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000000",
+                  "android_client_info": {
+                    "package_name": "org.traccar.client"
+                  }
+                }
+              }
+            ],
+            "configuration_version": "1"
+          }
+          JSON
+
+      - name: Build all variants
+        run: ./gradlew assemble
+
+      - name: Upload regularDebug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: traccar-regular-debug
+          path: app/build/outputs/apk/regular/debug/*.apk
+
+      - name: Upload regularRelease APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: traccar-regular-release
+          path: app/build/outputs/apk/regular/release/*.apk
+
+      - name: Upload googleDebug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: traccar-google-debug
+          path: app/build/outputs/apk/google/debug/*.apk
+
+      - name: Upload googleRelease APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: traccar-google-release
+          path: app/build/outputs/apk/google/release/*.apk
