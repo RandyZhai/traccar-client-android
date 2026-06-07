@@ -49,6 +49,15 @@
         android:summary="@string/settings_angle_summary"
         android:title="@string/settings_angle_title" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="gcj02"
+        android:summaryOff="@string/settings_gcj02_off_summary"
+        android:summaryOn="@string/settings_gcj02_on_summary"
+        android:switchTextOff="@string/settings_gcj02_off"
+        android:switchTextOn="@string/settings_gcj02_on"
+        android:title="@string/settings_gcj02_title" />
+
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="buffer"

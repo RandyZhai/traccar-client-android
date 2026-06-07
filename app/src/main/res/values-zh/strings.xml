@@ -38,6 +38,17 @@
   <string name="status_network_online">网络在线</string>
   <string name="status_network_offline">网络离线</string>
   <string name="hidden_app_name">设备设置</string>
+  <string name="settings_buffer">离线缓存</string>
+  <string name="settings_buffer_off_summary">缓存已关闭</string>
+  <string name="settings_buffer_on_summary">缓存已开启</string>
+  <string name="settings_wakelock">唤醒锁</string>
+  <string name="settings_wakelock_off_summary">唤醒锁已关闭</string>
+  <string name="settings_wakelock_on_summary">唤醒锁已开启</string>
+  <string name="settings_gcj02_title">GCJ-02坐标转换</string>
+  <string name="settings_gcj02_off">关</string>
+  <string name="settings_gcj02_on">开</string>
+  <string name="settings_gcj02_off_summary">使用WGS-84原始坐标</string>
+  <string name="settings_gcj02_on_summary">转为GCJ-02坐标（高德/百度地图用）</string>
   <string name="hidden_alert">APP已隐藏，请拨号8722227重新打开</string>
   <string name="error_msg_invalid_url">请输入有效的地址，如http://或https://</string>
 </resources>

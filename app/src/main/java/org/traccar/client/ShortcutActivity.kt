@@ -79,7 +79,8 @@ class ShortcutActivity : AppCompatActivity() {
         PositionProviderFactory.create(this, object : PositionListener {
             override fun onPositionUpdate(position: Position) {
                 val preferences = PreferenceManager.getDefaultSharedPreferences(this@ShortcutActivity)
-                val request = formatRequest(preferences.getString(MainFragment.KEY_URL, null)!!, position, ALARM_SOS)
+                val gcj02 = preferences.getBoolean(MainFragment.KEY_GCJ02, false)
+                val request = formatRequest(preferences.getString(MainFragment.KEY_URL, null)!!, position, ALARM_SOS, gcj02)
                 sendRequestAsync(request, object : RequestHandler {
                     override fun onComplete(success: Boolean) {
                         if (success) {

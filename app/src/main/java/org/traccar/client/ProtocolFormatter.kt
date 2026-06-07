@@ -19,13 +19,18 @@ import android.net.Uri
 
 object ProtocolFormatter {
 
-    fun formatRequest(url: String, position: Position, alarm: String? = null): String {
+    fun formatRequest(url: String, position: Position, alarm: String? = null, gcj02: Boolean = false): String {
+        val (latitude, longitude) = if (gcj02) {
+            CoordinateConverter.toGcj02(position.latitude, position.longitude)
+        } else {
+            Pair(position.latitude, position.longitude)
+        }
         val serverUrl = Uri.parse(url)
         val builder = serverUrl.buildUpon()
             .appendQueryParameter("id", position.deviceId)
             .appendQueryParameter("timestamp", (position.time.time / 1000).toString())
-            .appendQueryParameter("lat", position.latitude.toString())
-            .appendQueryParameter("lon", position.longitude.toString())
+            .appendQueryParameter("lat", latitude.toString())
+            .appendQueryParameter("lon", longitude.toString())
             .appendQueryParameter("speed", position.speed.toString())
             .appendQueryParameter("bearing", position.course.toString())
             .appendQueryParameter("altitude", position.altitude.toString())

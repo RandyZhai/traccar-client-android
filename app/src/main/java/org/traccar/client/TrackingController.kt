@@ -37,6 +37,7 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
 
     private val url: String = preferences.getString(MainFragment.KEY_URL, context.getString(R.string.settings_url_default_value))!!
     private val buffer: Boolean = preferences.getBoolean(MainFragment.KEY_BUFFER, true)
+    private val gcj02: Boolean = preferences.getBoolean(MainFragment.KEY_GCJ02, false)
 
     private var isOnline = networkManager.isOnline
     private var isWaiting = false
@@ -152,7 +153,7 @@ class TrackingController(private val context: Context) : PositionListener, Netwo
 
     private fun send(position: Position) {
         log("send", position)
-        val request = formatRequest(url, position)
+        val request = formatRequest(url, position, gcj02 = gcj02)
         sendRequestAsync(request, object : RequestHandler {
             override fun onComplete(success: Boolean) {
                 if (success) {

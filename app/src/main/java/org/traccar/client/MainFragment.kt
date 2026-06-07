@@ -159,6 +159,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         findPreference<Preference>(KEY_ACCURACY)?.isEnabled = enabled
         findPreference<Preference>(KEY_BUFFER)?.isEnabled = enabled
         findPreference<Preference>(KEY_WAKELOCK)?.isEnabled = enabled
+        findPreference<Preference>(KEY_GCJ02)?.isEnabled = enabled
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -300,6 +301,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         const val KEY_STATUS = "status"
         const val KEY_BUFFER = "buffer"
         const val KEY_WAKELOCK = "wakelock"
+        const val KEY_GCJ02 = "gcj02"
         private const val PERMISSIONS_REQUEST_LOCATION = 2
         private const val PERMISSIONS_REQUEST_BACKGROUND_LOCATION = 3
     }
